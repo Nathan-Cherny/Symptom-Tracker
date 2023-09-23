@@ -1,19 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <script src="main.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
         <title>Symptom Tracker</title>
     </head>
     <body>
         <ul class="navigation">
-            <li><a href="index.html">Map</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
         </ul>
 
         <div>
-            <p>hi</p>
+            <form action="POST">
+                <input name="hall"/>
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> I have a bike</label><br>
+                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                <label for="vehicle2"> I have a car</label><br>
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                <label for="vehicle3"> I have a boat</label>
+                <input type="submit" value="Submit">
+            </form>
         </div>
     </body>
 </html>

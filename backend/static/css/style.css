@@ -11,13 +11,23 @@ body{
     margin: 0;
 }
 
-img{
-    max-height: 250px;
-    max-width: 250px;
+tr div{
+    position: relative;
 }
 
 td{
     border: 1px solid black;
+}
+
+.tableContainer{
+    border-collapse: collapse;
+}
+
+.centeredInImage{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 
 .navigation{
@@ -32,6 +42,7 @@ td{
     padding: 0;
     overflow: hidden;
     margin-bottom: 10px;
+    z-index: 1;
 }
 
 .navigation li{

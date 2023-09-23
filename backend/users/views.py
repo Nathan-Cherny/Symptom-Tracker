@@ -68,3 +68,6 @@ def index(request):
             "pretty": json.dumps(request.session.get("user"), indent=4),
         },
     )
+
+def report(request):
+    return render(request, 'report.html', context={})
