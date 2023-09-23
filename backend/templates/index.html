@@ -1,8 +1,12 @@
+{% load static %}
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>Auth0 Example</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Symptom Tracker</title>
   </head>
+
   <body>
     {% if session %}
     <h1>Welcome {{session.userinfo.name}}!</h1>
@@ -12,5 +16,66 @@
     <h1>Welcome Guest</h1>
     <p><a href="{% url 'login' %}">Login</a></p>
     {% endif %}
+
+      <ul class="navigation">
+          <li class="active"><a href="window.location.href">Map</a></li>
+          <li><a href="report.html">Report a Sickness</a></li>
+      </ul>
+
+      <div section="info">
+          <h1>Symptom Tracker 👍👍👍</h1>
+      </div>
+
+      <div class="tableContainer center">
+          <table>
+              <tbody>
+                  <tr>
+                      <td>
+                          <img src="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF">
+                      </td>
+                      <td>
+                          <img src="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF">
+                      </td>
+                      <td>
+                          <img src="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF">
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+
+                      </td>
+                      <td>
+
+                      </td>
+                      <td>
+                          
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+
+                      </td>
+                      <td>
+
+                      </td>
+                      <td>
+                          
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+
+                      </td>
+                  </tr>
+                  <tr>
+
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      
+      <div class="center">
+          <a href="report.html">Report Symptoms</a>
+      </div>
   </body>
 </html>
