@@ -5,6 +5,10 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 
+from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+
+User = get_user_model()
 
 oauth = OAuth()
 
@@ -18,14 +22,25 @@ oauth.register(
     server_metadata_url=f"https://{settings.AUTH0_DOMAIN}/.well-known/openid-configuration",
 )
 
+
 def login(request):
     return oauth.auth0.authorize_redirect(
         request, request.build_absolute_uri(reverse("callback"))
     )
 
+
 def callback(request):
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
+    data = {
+        'name': token['userinfo']['name'],
+        'email': token['userinfo']['email'],
+        'photo': token['userinfo']['picture']
+    }
+    try:
+        user = User.objects.get(email=data['email'])
+    except User.DoesNotExist:
+        User.objects.create(**data)
     return redirect(request.build_absolute_uri(reverse("index")))
 
 
