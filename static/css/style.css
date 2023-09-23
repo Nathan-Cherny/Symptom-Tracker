@@ -7,6 +7,10 @@ p, h1, div{
     text-align: center
 }
 
+a{
+    padding: 5px;
+}
+
 body{
     margin: 0;
 }
@@ -17,7 +21,11 @@ tr div{
 
 td{
     border: 1px solid black;
-    height: 
+}
+
+img{
+    width: 300px;
+    height: 250px;
 }
 
 .tableContainer{
@@ -28,7 +36,12 @@ td{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0, 0.5);
+    color: white;
+    width: 90%;
+    padding: 10px;
+    font-size: 25px;
 }
 
 .navigation{

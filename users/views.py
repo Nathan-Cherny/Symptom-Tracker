@@ -38,7 +38,7 @@ def callback(request):
         'photo': token['userinfo']['picture']
     }
     try:
-        user = User.objects.get(email=data['email'])
+        User.objects.get(email=data['email'])
     except User.DoesNotExist:
         User.objects.create(**data)
     return redirect(request.build_absolute_uri(reverse("index")))
@@ -60,12 +60,12 @@ def logout(request):
 
 
 def index(request):
+    print(request.session.get("user"))
     return render(
         request,
         "index.html",
         context={
             "session": request.session.get("user"),
-            "pretty": json.dumps(request.session.get("user"), indent=4),
         },
     )
 

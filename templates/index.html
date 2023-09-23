@@ -1,26 +1,23 @@
 {% load static %}
 <html>
   <head>
-    <script src="main.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
     <title>Symptom Tracker</title>
   </head>
 
   <body>
-    {% if session %}
-    <h1>Welcome {{session.userinfo.name}}!</h1>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-    <div><pre>{{pretty}}</pre></div>
-    {% else %}
-    <h1>Welcome Guest</h1>
-    <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
 
       <ul class="navigation">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="{% url 'report' %}">Report a Sickness</a></li>
 
+          {% if session %}
+          <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
+          {% else %}
+          <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
+          {% endif %}
       </ul>
 
       <div>
@@ -34,25 +31,51 @@
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">Kardon</div>
                         </div>
                     </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/atlantic.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">Atlantic Terminal</div>
                         </div>
                     </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/university.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">University Village</div>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <img src="{% static 'buildings/james_s_white.png' %}">
+                            <div class="centeredInImage">White Hall</div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <div>
+                            <img src="{% static 'buildings/j_h.png' %}">
+                            <div class="centeredInImage">J&H</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <img src="{% static 'buildings/nineteen_forty.png' %}">
+                            <div class="centeredInImage">1940</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <img src="{% static 'buildings/conwell.png' %}">
+                            <div class="centeredInImage">Conwell</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <img src="{% static 'buildings/Beech International.png' %}">
+                            <div class="centeredInImage">Beech International</div>
                         </div>
                     </td>
                   </tr>
@@ -60,51 +83,25 @@
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">The Edge</div>
                         </div>
                     </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">Morgan Hall</div>
                         </div>
                     </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">Oxford Village</div>
                         </div>
                     </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
-                        </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">1300</div>
                         </div>
                     </td>
                   </tr>
@@ -112,7 +109,7 @@
                     <td>
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
-                            <div class="centeredInImage">test</div>
+                            <div class="centeredInImage">Temple Towers</div>
                         </div>
                     </td>
                   </tr>
