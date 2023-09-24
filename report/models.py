@@ -35,6 +35,8 @@ class Report(models.Model):
     smoked = models.BooleanField()
     drank = models.BooleanField()
     around_sick = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.name
