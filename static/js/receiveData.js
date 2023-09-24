@@ -7,14 +7,19 @@ GREEN = 0
 
 function setTDs(){
     let tds = document.getElementsByTagName("td")
-
-    for(td of tds){
-        setColor(td, 3)
+    let health_scores = getHealthScores()
+    let i=0
+    for(let td of tds){
+        if(td.id != ""){
+            setColor(td, parseInt(health_scores[i].innerHTML))
+            i++ 
+        }
     }
 }
 
 function setColor(td, cases){
     div = td.children[0]
+    console.log(td, cases)
     if(td.id == ""){return}
     if(cases >= 60){
         div.style.backgroundColor = "rgb(255, 0, 0, 0.5)"
@@ -22,6 +27,15 @@ function setColor(td, cases){
     else if(cases >= 30){
         div.style.backgroundColor = "orange"
     }
-    
+    return;
+}
 
+function getHealthScores(){
+    let places = document.getElementsByName("place")
+    let health_scores = document.getElementsByName("health_score")
+
+    console.log(places)
+    console.log(health_scores)
+
+    return health_scores
 }
