@@ -120,3 +120,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
 AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
 AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://localhost:6379/0',
+        'TIMEOUT': 60,
+        'MAX_ENTRIES': 1_000_000,
+    },
+}
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
+accept_content = ['application/json']
+result_serializer = 'json'
+task_serializer = 'json'
+timezone = 'US/Eastern'
+CELERY_RESULT_BACKEND = 'django-db'
