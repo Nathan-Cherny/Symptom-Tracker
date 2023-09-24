@@ -1,12 +1,10 @@
-import json
-from authlib.integrations.django_client import OAuth
-from django.conf import settings
-from django.shortcuts import redirect, render
-from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 
+from authlib.integrations.django_client import OAuth
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect, render
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -60,7 +58,6 @@ def logout(request):
 
 
 def index(request):
-    print(request.session.get("user"))
     return render(
         request,
         "index.html",
@@ -69,5 +66,5 @@ def index(request):
         },
     )
 
-def report(request):
-    return render(request, 'report.html', context={})
+
+
