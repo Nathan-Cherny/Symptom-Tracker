@@ -19,17 +19,17 @@
         </style>
         <title>Symptom Tracker</title>
     </head>
-    <body style="background-image: linear-gradient(rgb(150, 150, 200), rgb(150, 200, 150)); height: 1250px;">
+    <body style="background-image: linear-gradient(rgb(150, 150, 200), rgb(150, 200, 150)); height: 1350px;">
         <ul class="navigation">
-            <li><a href="/">Home</a></li>
+            <li ><a href="/">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
             {% if session %}
-            <li style="float: right" ><a class="far fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
+            <li style="float: right" ><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
             {% else %}
             <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
             {% endif %}
         </ul>
-
+        {% if session %}
         <div>
             <h1>Enter a report of illness</h1>
             <p>By entering information based off of a recent diagnosis or symptoms you currently feel, we can accurately track outbreaks and prevent illness from spreading in our community. Please, answer the following.</p>
@@ -38,7 +38,7 @@
         <div>
             <form method="POST">
                 {% csrf_token %}
-                <div id="diagnosed">
+                <div style="padding: 15px;" id="diagnosed">
                     <label for="diagnosed">Are you diagnosed with...</label>
                     <select name="diagnosed">
                         <option>I haven't been diagnosed with anything recently</option>
@@ -69,6 +69,7 @@
                 </div>
                 <hr>
                 <div id="notDiagnosed">
+                    <p>What are some symptoms you have been experiencing recently?</p>
                     <div>
                         <label for="cough">Cough</label>
                         <input type="checkbox" id="" name="cough">
@@ -138,10 +139,14 @@
                     
                 </div>
                 <div id="finalSubmit">
+                   
                     <button onsubmit="postForm()" type="submit">Submit</button>
                 </div>
             </form>
         </div>
+        {% else %}
+        <h1>Please login! You can log in with your Google account at the top right!</h1>
+        {% endif %}
     </body>
 
 </html>

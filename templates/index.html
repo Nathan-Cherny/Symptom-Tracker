@@ -3,27 +3,31 @@
   <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-
+    <script src="{% static 'js/receiveData.js' %}"></script>
     <title>Is there an outbreak?</title>
   </head>
 
   <body>
 
-      <ul class="navigation">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="/report/">Report a Sickness</a></li>
-
-          {% if session %}
-          <li style="float: right" ><a class="far fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
-          {% else %}
-          <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
-          {% endif %}
-      </ul>
+    <ul class="navigation">
+        <li class="active"><a href="/">Home</a></li>
+        <li ><a href="/report">Report a Sickness</a></li>
+        {% if session %}
+        <li style="float: right" ><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+        {% else %}
+        <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
+        {% endif %}
+    </ul>
 
       <div style="background-color: rgb(200, 200, 200); padding: 15px; margin-top: -10px;">
           <h1>Is There An Outbreak On Campus?</h1>
       </div>
 
+      <div class="key">
+        <p><span style="font-size: 45px; color: red">&#9632;</span> : more than 60 cases of a specific disease at this place - stay away</p> 
+        <p><span style="font-size: 45px; color: orange">&#9632;</span> : more than 30 cases of a specific disease at this place - be cautious</p> 
+        <p><span style="font-size: 45px; color: green">&#9632;</span> : more than 0 cases of a specific disease at this place - little concern</p>
+      </div>
       <div style="background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150))">
           <table class="tableContainer center">
               <tbody>

@@ -30,7 +30,9 @@ function getDictOfData(){
     let postDict = {}
 
     for(let select of selects){
-        console.log(select)
+        if(select.value == "I haven't been diagnosed with anything recently"){
+            postDict[String(select.name)] = select.value
+        }
         postDict[String(select.name)] = select.value
     }
 
