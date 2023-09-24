@@ -29,9 +29,12 @@ def index(request):
             'user': User.objects.get(email=request.session['user']['userinfo']['email']),
             'diagnosed_with': data.get('diagnosed'),
             'lives_at': data.get('hall'),
-            'smoked': data.get('smoked'),
-            'drank': data.get('drank'),
-            'around_sick': data.get('around_sick')
+            'smoked': data.get('smoked') == 'on',
+            'drank': data.get('drink') == 'on',
+            'around_sick': data.get('sick') == 'on',
+            'symptoms': {
+                ''
+            }
         }
 
         print(report_data)
