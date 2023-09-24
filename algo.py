@@ -1,15 +1,11 @@
-
-from collections import Counter
-
-
 """
+############## Are you diagnose with... corresponding numbers ##########
 0 - disease is unknown
 1 - Stomach Bug
 2 - Covid
 3 - Cold
 
-
-
+################Dorm's corresponding number ###########
 1-Kardon
 2-Atlantic terminal
 3-University village
@@ -24,12 +20,26 @@ from collections import Counter
 12-1300
 13-Temple Towers
 """
+
+## Dummy Data ##
+sym1 = [True, True, False, True, False, True, False, False, True, True, False, False, False, False, False, False]
+sym2 = [True, True, True, True, True, True, False, False, False, False, False, False, False, False, False, True]
+sym3 = [False, True, False, False, True, True, False, False, True, False, False, False, False, False, False, False]
+sym4 = [True, True, False, False, True, True, False, False, True, False, False, True, True, False, False, False]
+stu1 = [1]
+stu2 = [4]
+stu3 = [10]
+
+
+
+
+
+
+
+############
 diseaseKnown = 0
 
 schoolsickData = []
-
-riskRestaurants = []
-restaurants = []
 
 oneStomach = 0 
 oneCovid = 0
@@ -83,33 +93,35 @@ thirteenStomach = 0
 thirteenCovid = 0
 thirteenCold = 0
 
-def surveySickness(): ##################### surveySickness()
 
-    smoker = False
-    drink = False
-    nearSick = False
+
+#Calculates probability of each sickness based on symptoms, adds most likely sickness to list of cases
+def surveySickness(stu, sym):
 
     coldValue = 0
     covidValue = 0
     stomachBugValue = 0
 
-    cough = False
-    fever = False
-    chills = False
-    breathing = False
-    taste = False
-    smell = False
-    fatigue = False
-    vomit = False
-    nausea = False
-    stomach = False
-    diarrhea = False
-    nose = False
-    throat = False 
+    cough = sym[0]
+    fever = sym[1]
+    chills = sym[2]
+    breathing = sym[3]
+    taste = sym[4]
+    smell = sym[5]
+    fatigue = sym[6]
+    vomit = sym[7]
+    nausea = sym[8]
+    stomach = sym[9]
+    diarrhea = sym[10]
+    nose = sym[11]
+    throat = sym[12]
+    smoker = sym[13]
+    drink = sym[14]
+    nearSick = sym[15]
 
-    symptomList = [cough, fever, chills, breathing, taste, smell, fatigue, vomit, nausea, stomach, diarrhea, nose, throat]
+    symptomList = [cough, fever, chills, breathing, taste, smell, fatigue, vomit, nausea, stomach, diarrhea, nose, throat, smoker, drink, nearSick]
 
-    stomachBugMultiplier = [0,0,0,0,0,0,1,0,1,2,2,0,0]
+    stomachBugMultiplier = [0,0,0,0,0,0,1,0,1,2,2,0,0] ##Some symptoms count more than others
 
     covidMultiplier = [2,1,1,2,1,1,1,0,0,0,0,0,1]
 
@@ -124,78 +136,101 @@ def surveySickness(): ##################### surveySickness()
         coldValue = 1
     elif(diseaseKnown == 0): 
         
-        for i in range(len(symptomList)):
-            stomachBugValue += stomachBugMultiplier[i]*symptomList[i] - (drink) + (2*nearSick)
-            covidValue += covidMultiplier[i]*symptomList[i] - (smoker) - (drink) + (2*nearSick)
-            coldValue += coldMultiplier[i]*symptomList[i] - (smoker) - (drink) + (2*nearSick)
+        for i in range(len(symptomList)-3): #Calculating confidence in user's illness
+            stomachBugValue += stomachBugMultiplier[i]*symptomList[i]  
+            covidValue += covidMultiplier[i]*symptomList[i]
+            coldValue += coldMultiplier[i]*symptomList[i]
+        stomachBugValue = stomachBugValue - (drink) 
+        covidValue = covidValue - smoker - (drink) + (2*nearSick)
+        coldValue = coldValue - (smoker) - (drink) + (2*nearSick)
         
-
-        stomachBugValue = float(stomachBugValue)
-        covidValue = float(covidValue)
-        coldValue = float(coldValue)
 
         stomachBugValue = float(stomachBugValue/sum(stomachBugMultiplier))
         covidValue = float(covidValue/sum(covidMultiplier))
         coldValue = float(coldValue/sum(coldMultiplier))
 
-        print("Stomach: ", stomachBugValue)
-        print("Cold: ", coldValue)
-        print("Covid: ", covidValue)
-
-        studentSickData = []
+        studentSickData = [] #each element is dorm, illness, confidence in illness
 
         if (stomachBugValue > coldValue) and (stomachBugValue > covidValue):
-            studentSickData.append("Stomach Bug")
-            studentSickData.append(stomachBugValue)
+            stu.append("Stomach Bug")
+            stu.append(stomachBugValue)
         
         elif (covidValue > coldValue) and (covidValue > stomachBugValue):
-            studentSickData.append("Covid")
-            studentSickData.append(covidValue)
+            stu.append("Covid")
+            stu.append(covidValue)
         elif (coldValue > covidValue) and (coldValue > stomachBugValue):
-            studentSickData.append("Common Cold")
-            studentSickData.append(coldValue)
+            stu.append("Common Cold")
+            stu.append(coldValue)
         else:
-            studentSickData.append("Inconclusive")
+            stu.append("Inconclusive")
             values = [coldValue, covidValue, stomachBugValue]
             values.sort()
-            studentSickData.append(values[2])
+            stu.append(values[2])
 
-    schoolsickData.append(studentSickData)
+    schoolsickData.append(stu)
+    return(stu)
+    
 
+#Calculates illness level of dorm (red/orange/green)
+def getRiskData(): 
+    global oneStomach
+    global oneCovid 
+    global oneCold 
 
-            
+    global twoStomach  
+    global twoCovid 
+    global twoCold 
 
+    global threeStomach  
+    global threeCovid 
+    global threeCold 
+        
+    global fourStomach  
+    global fourCovid 
+    global fourCold 
 
+    global fiveStomach 
+    global fiveCovid 
+    global fiveCold 
 
-def getRiskRestaurant(): ################################ getRiskRestaurant
+    global sixStomach  
+    global sixCovid 
+    global sixCold 
 
-    count_dict = {}
+    global sevenStomach  
+    global sevenCovid 
+    global sevenCold 
 
-    for res in restaurants:
-        if res in count_dict:
-            count_dict[res] += 1
-        else:
-            count_dict[res] = 1
+    global eightStomach 
+    global eightCovid 
+    global eightCold 
 
-    string_count_list = [(res, count) for res, count in count_dict.items()]
+    global nineStomach 
+    global nineCovid 
+    global nineCold 
 
-    for item in string_count_list:
-        if(item[1] > 10):
-            riskRestaurants.append(item)
+    global tenStomach 
+    global tenCovid 
+    global tenCold 
 
+    global elevenStomach 
+    global elevenCovid 
+    global elevenCold 
 
+    global twelveStomach  
+    global twelveCovid 
+    global twelveCold 
 
-#13 dorms, student[0] = dorm
-#student[1] = disease
-#student[2] = confidence level  
-def getRiskArea(): ########################################### getRiskArea()
+    global thirteenStomach  
+    global thirteenCovid 
+    global thirteenCold 
 
    
     for student in schoolsickData:
         if student[0] == 1:
             if student[1] == "Stomach Bug":
                 if student[2] > 0.3:
-                    if student[2] >= 0.8:
+                    if student[2] >= 0.8: #More confident values count twice
                         oneStomach += 2
                     else:
                         oneStomach += 1
@@ -463,9 +498,15 @@ def getRiskArea(): ########################################### getRiskArea()
                             thirteenCold += 1
 
 
-#0-30, 30-60, 60+
-#n - dorm
-def getRiskArea(n): ################################### getRiskArea
+
+'''
+n - dorm
+gives level (green/orange/red) of dorm
+1 - green
+2 - orange
+3 - red
+'''
+def getRiskLevel(n): ################################### getRiskArea
         oneRisk = 0
         twoRisk = 0
         threeRisk = 0
@@ -481,7 +522,7 @@ def getRiskArea(n): ################################### getRiskArea
         thirteenRisk = 0
 
         if n == 1:
-            if (oneCold > 60) or (oneCovid > 60) or (oneStomach > 60):
+            if (oneCold > 60) or (oneCovid > 60) or (oneStomach > 60): 
                 oneRisk = 3
             elif (oneCold > 30) or (oneCovid > 30) or (oneStomach > 30):
                 oneRisk = 2
@@ -598,11 +639,15 @@ def getRiskArea(n): ################################### getRiskArea
                 thirteenRisk = 1
             return thirteenRisk
             
-# n - dorm
-def getDisease(n): ##################################################### getDisease(n)
+'''
+n - dorm
+gets most common disease(s) of dorm
+
+'''
+def getDisease(n): 
     str = ""
 
-    oneflag = False
+    oneflag = False  #Flags used to add "and" if theres more than 1 disease with over 30 cases at a dorm
     twoflag = False
     threeflag = False
     fourflag = False
@@ -799,19 +844,82 @@ def getDisease(n): ##################################################### getDise
     return str
             
 
-
-
 if __name__ == "__main__":
-    #surveySickness()
+    stu01 = surveySickness(stu1, sym1)
+    stu02 = surveySickness(stu2, sym2)
+    stu03 = surveySickness(stu3, sym3)
+    stu04 = surveySickness(stu1, sym1)
+    stu05 = surveySickness(stu2, sym4)
+    stu06 = surveySickness(stu3, sym2)
+    stu07 = surveySickness(stu1, sym2)
+    stu08 = surveySickness(stu1, sym2)
+    stu09 = surveySickness(stu2, sym4)
+    stu010 = surveySickness(stu3, sym4)
+    stu011 = surveySickness(stu1, sym2)
+    stu012 = surveySickness(stu2, sym2)
+    stu013 = surveySickness(stu3, sym2)
+    stu014 = surveySickness(stu1, sym3)
+    stu015 = surveySickness(stu2, sym3)
+    stu1016 = surveySickness(stu3, sym4)
+    stu17 = surveySickness(stu1, sym2)
+    stu18 = surveySickness(stu2, sym2)
+    stu19 = surveySickness(stu3, sym3)
+    stu20 = surveySickness(stu1, sym4)
+    stu21 = surveySickness(stu2, sym4)
+    stu22 = surveySickness(stu3, sym4)
+    stu23 = surveySickness(stu1, sym1)
+    stu24 = surveySickness(stu2, sym1)
+    stu25 = surveySickness(stu3, sym1)
+    stu26 = surveySickness(stu2, sym2)
+    stu27 = surveySickness(stu2, sym2)
+    stu28 = surveySickness(stu3, sym1)
+    stu29 = surveySickness(stu1, sym1)
+    stu30 = surveySickness(stu2, sym2)
+    stu31 = surveySickness(stu3, sym1)
+    stu32 = surveySickness(stu1, sym1)
+    stu33 = surveySickness(stu2, sym2)
+    stu34 = surveySickness(stu3, sym1)
+    stu35 = surveySickness(stu2, sym2)
+    stu36 = surveySickness(stu2, sym2)
+    stu37 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)
+    stu38 = surveySickness(stu2, sym2)     
+    getRiskData()
+    x = getRiskLevel(4)
+    print(x)
+    print(fourCovid)
+    str2 = getDisease(4)
+    print(str2)
+    
+
+
+
+    #print(stu1)
     #getRiskRestaurant()
-    number = getRiskArea(12)
-    print(number)
-    numbertwo = getRiskArea(1)
-    print(numbertwo)
+    #number = getRiskArea(12)
+    #print(number)
+    #numbertwo = getRiskArea(1)
+    #print(numbertwo)
+    #rint(getDisease(2))
 
-    print(getDisease(2))
-
-
+########################## Dictionary ##################################
 """   
 1-Kardon
 2-Atlantic terminal
@@ -879,5 +987,5 @@ diction = {
     "TempleTowersCovidCases": thirteenCovid,
     "TempleTowersColdCases": thirteenCold,
     "TempleTowersStomachCases": thirteenStomach,
-
+}
 
