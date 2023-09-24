@@ -33,7 +33,19 @@ def index(request):
             'drank': data.get('drink') == 'on',
             'around_sick': data.get('sick') == 'on',
             'symptoms': {
-                ''
+                'cough': data.get('cough') == 'on',
+                'fever': data.get('fever') == 'on',
+                'chills': data.get('chills') == 'on',
+                'smell': data.get('smell') == 'on',
+                'fatigue': data.get('fatigue') == 'on',
+                'vomit': data.get('vomit') == 'on',
+                'nausea': data.get('nausea') == 'on',
+                'stomach': data.get('stomach') == 'on',
+                'diarrhea': data.get('diarrhea') == 'on',
+                'taste': data.get('taste') == 'on',
+                'breathing': data.get('breathing') == 'on',
+                'nose': data.get('nose') == 'on',
+                'taste': data.get('taste') == 'on'
             }
         }
 

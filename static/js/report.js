@@ -51,8 +51,8 @@ function getDictOfData(){
     delete symptoms.drink
     delete symptoms.sick
 
-    console.log(symptoms)
     postDict["symptoms"] = symptoms
+    console.log(postDict)
     return postDict
 }
 

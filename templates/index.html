@@ -13,7 +13,7 @@
         <li class="active"><a href="/">Home</a></li>
         <li ><a href="/report">Report a Sickness</a></li>
         {% if session %}
-        <li style="float: right" ><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+        <li style="float: right; color: white;" >Welcome {{ session.userinfo.given_name }} <img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
         {% else %}
         <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
         {% endif %}
