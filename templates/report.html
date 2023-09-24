@@ -5,7 +5,7 @@
         <script src="{% static 'js/report.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <style>
             #notDiagnosed{
                 display: none;
@@ -36,7 +36,8 @@
         </div>
         <hr>
         <div>
-            <div id="diagnosedForm">
+            <form method="POST">
+                {% csrf_token %}
                 <div id="diagnosed">
                     <label for="diagnosed">Are you diagnosed with...</label>
                     <select name="diagnosed">
@@ -45,12 +46,9 @@
                         <option>Common Cold</option>
                         <option>Stomach Bug</option>
                     </select>
-                    <button onclick="onDiagnosedSubmit()">Submit</button>
+                    <button type="button" onclick="onDiagnosedSubmit()">Submit</button>
                 </div>
                 <div>
-            </div>
-            <form action="POST">
-                {% csrf_token %}
                 <div id="hallQuestion">
                     <label for="hall">Where do you live?</label>
                     <select name="hall">
@@ -140,7 +138,7 @@
                     
                 </div>
                 <div id="finalSubmit">
-                    <button onsubmit="postForm()"type="submit">Submit</button>
+                    <button onsubmit="postForm()" type="submit">Submit</button>
                 </div>
             </form>
         </div>

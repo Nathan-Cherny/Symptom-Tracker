@@ -1,11 +1,11 @@
 function notDiagnosed(){
     var notDiagnosed = document.getElementById("notDiagnosed").style.display = "block"
-    var diagnosed = document.getElementById("diagnosed").style.display = "none"
+    //  var diagnosed = document.getElementById("diagnosed").style.display = "none"
     document.getElementById("hallQuestion").style.display = "block"
 }
 
 function diagnosed(){
-    var diagnosed = document.getElementById("diagnosed").style.display = "none"
+    // var diagnosed = document.getElementById("diagnosed").style.display = "none"
     document.getElementById("hallQuestion").style.display = "block"
     document.getElementById("finalSubmit").style.display = "block"
     return;
@@ -30,22 +30,18 @@ function getDictOfData(){
     let postDict = {}
 
     for(let select of selects){
-        postDict[select.name] = select.value
+        console.log(select)
+        postDict[String(select.name)] = select.value
     }
 
     for(let input of inputs){
-        postDict[input.name] = input.checked
+        postDict[String(input.name)] = input.checked
     }
 
     return postDict
 }
 
 function postForm(){
-    let data = getDictOfData()
+    $.post("/report", getDictOfData())
 
-    var xmlhttp = new XMLHttpRequest();
-    var xml = data
-
-    xmlhttp.setRequestHeader('Content-Type', 'text/json')
-    xmlhttp.send(xml)
 }
