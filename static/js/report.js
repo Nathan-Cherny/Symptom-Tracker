@@ -28,6 +28,7 @@ function getDictOfData(){
     let inputs = document.getElementsByTagName("input")
     
     let postDict = {}
+    let symptoms = {}
 
     for(let select of selects){
         if(select.value == "I haven't been diagnosed with anything recently"){
@@ -36,10 +37,22 @@ function getDictOfData(){
         postDict[String(select.name)] = select.value
     }
 
+
     for(let input of inputs){
-        postDict[String(input.name)] = input.checked
+        symptoms[String(input.name)] = input.checked
     }
 
+    delete symptoms.csrfmiddlewaretoken
+
+    postDict['smoked'] = symptoms.smoke
+    postDict['drank'] = symptoms.drink
+    postDict['around_sick'] = symptoms.sick
+    delete symptoms.smoke
+    delete symptoms.drink
+    delete symptoms.sick
+
+    console.log(symptoms)
+    postDict["symptoms"] = symptoms
     return postDict
 }
 
