@@ -6,6 +6,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
+from places.models import Place
+
 User = get_user_model()
 
 oauth = OAuth()
@@ -58,13 +60,12 @@ def logout(request):
 
 
 def index(request):
+    places = Place.objects.all()
     return render(
         request,
         "index.html",
         context={
             "session": request.session.get("user"),
+            'places': places
         },
     )
-
-
-

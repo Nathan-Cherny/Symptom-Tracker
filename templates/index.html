@@ -129,5 +129,9 @@
             <a id="banana" target="none" href="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" >Made by TEAM THUMBS UP 👍👍👍</a>| OWLhacks Fall 2023 | <a style="font-size: 20px;" href="https://github.com/Nathan-Cherny/Symptom-Tracker">github.com/Nathan-Cherny/Symptom-Tracker</a>
         </footer>
      </div>
+      {% for place in places %}
+        <p> {{ place.name }} </p>
+        <p> {{ place.health_score }} </p>
+      {% endfor %}
   </body>
 </html>
