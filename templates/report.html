@@ -19,7 +19,7 @@
         </style>
         <title>Symptom Tracker</title>
     </head>
-    <body>
+    <body style="background-image: linear-gradient(rgb(150, 150, 200), rgb(150, 200, 150)); height: 1250px;">
         <ul class="navigation">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
@@ -30,6 +30,11 @@
             {% endif %}
         </ul>
 
+        <div>
+            <h1>Enter a report of illness</h1>
+            <p>By entering information based off of a recent diagnosis or symptoms you currently feel, we can accurately track outbreaks and prevent illness from spreading in our community. Please, answer the following.</p>
+        </div>
+        <hr>
         <div>
             <div id="diagnosedForm">
                 <div id="diagnosed">
@@ -44,7 +49,7 @@
                 </div>
                 <div>
             </div>
-            <form id="post">
+            <form action="POST">
                 {% csrf_token %}
                 <div id="hallQuestion">
                     <label for="hall">Where do you live?</label>
@@ -52,7 +57,7 @@
                         <option value="kardon">Kardon</option>
                         <option value="atlantic">Atlantic Terminal</option>
                         <option value="university">University Village</option>
-                        <option value="hames_s_white">White Hall</option>
+                        <option value="james_s_white">White Hall</option>
                         <option value="j_h">J&H</option>
                         <option value="nineteen_forty">1940</option>
                         <option value="conwell">Conwell</option>
@@ -61,7 +66,7 @@
                         <option value="morgan_hall">Morgan Hall</option>
                         <option value="oxford_village">Oxford Village</option>
                         <option value="thirteen">1300</option>
-                        <option value="temple.towers">Temple Towers</option>
+                        <option value="temple_towers">Temple Towers</option>
                     </select>
                 </div>
                 <hr>
@@ -99,8 +104,16 @@
                         <input type="checkbox" id="" name="stomach">
                     </div>
                     <div>
-                        <label for="diarrhea">No Taste</label>
+                        <label for="diarrhea">Diarrhea</label>
                         <input type="checkbox" id="" name="diarrhea">
+                    </div>
+                    <div>
+                        <label for="taste">No Taste</label>
+                        <input type="checkbox" id="" name="taste">
+                    </div>
+                    <div>
+                        <label for="breathing">Difficulty Breathing</label>
+                        <input type="checkbox" id="" name="breathing">
                     </div>
                     <div>
                         <label for="nose">Runny Nose</label>

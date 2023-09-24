@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
-    <title>Symptom Tracker</title>
+    <title>Is there an outbreak?</title>
   </head>
 
   <body>
@@ -20,11 +20,11 @@
           {% endif %}
       </ul>
 
-      <div>
-          <h1>Symptom Tracker 👍👍👍</h1>
+      <div style="background-color: rgb(200, 200, 200); padding: 15px; margin-top: -10px;">
+          <h1>Is There An Outbreak On Campus?</h1>
       </div>
 
-      <div>
+      <div style="background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150))">
           <table class="tableContainer center">
               <tbody>
                   <tr>
@@ -52,14 +52,14 @@
                             <div class="centeredInImage">White Hall</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr>
                     <td>
                         <div>
                             <img src="{% static 'buildings/j_h.png' %}">
                             <div class="centeredInImage">J&H</div>
                         </div>
                     </td>
+                  </tr>
+                  <tr>
                     <td>
                         <div>
                             <img src="{% static 'buildings/nineteen_forty.png' %}">
@@ -78,20 +78,23 @@
                             <div class="centeredInImage">Beech International</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr>
                     <td>
                         <div>
                             <img src="{% static 'buildings/edge.png' %}">
                             <div class="centeredInImage">The Edge</div>
                         </div>
-                    </td>
+                    </td> 
                     <td>
                         <div>
                             <img src="{% static 'buildings/morgan_hall.png' %}">
                             <div class="centeredInImage">Morgan Hall</div>
                         </div>
                     </td>
+                  </tr>
+                  <tr>
+                   <td>
+                    <img style="transform: scaleX(-1); mix-blend-mode: multiply;">
+                   </td>
                     <td>
                         <div>
                             <img src="{% static 'buildings/oxford_village.png' %}">
@@ -104,21 +107,23 @@
                             <div class="centeredInImage">1300</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr >
-                    <td colspan="1">
+                    <td>
                         <div>
                             <img src="{% static 'buildings/temple.towers.png' %}">
                             <div class="centeredInImage">Temple Towers</div>
                         </div>
                     </td>
+                    <td>
+                        <img>
+                    </td>
                   </tr>
               </tbody>
           </table>
       </div>
-      
-      <div class="center">
-          <a href="report.html">Report Symptoms</a>
-      </div>
+      <div style="background-color: rgb(150, 150, 150); padding: 15px;">
+        <footer>
+            <a id="banana" target="none" href="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" >Made by TEAM THUMBS UP 👍👍👍</a>| OWLhacks Fall 2023 | <a href="https://github.com/Nathan-Cherny/Symptom-Tracker">github.com/Nathan-Cherny/Symptom-Tracker</a>
+        </footer>
+     </div>
   </body>
 </html>
