@@ -31,9 +31,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    'django_celery_results',
-    'django_crontab',
-
     'report',
     'users',
 ]
@@ -133,16 +130,3 @@ CACHES = {
         'MAX_ENTRIES': 1_000_000,
     },
 }
-
-# Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
-accept_content = ['application/json']
-result_serializer = 'json'
-task_serializer = 'json'
-timezone = 'US/Eastern'
-CELERY_RESULT_BACKEND = 'django-db'
-
-# Cronjob
-CRONJOBS = [
-    ('0 44 * * *', 'report.tasks.delete_report'),
-]
