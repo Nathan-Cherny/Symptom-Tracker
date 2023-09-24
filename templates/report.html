@@ -23,8 +23,10 @@
         <ul class="navigation">
             <li ><a href="/">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
+
             {% if session %}
-            <li style="float: right" ><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+            <li style="float: right;"><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+            <li style="float: right;"> <a style="font-size: 25px;">Welcome {{ session.userinfo.given_name}} </a></li>
             {% else %}
             <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
             {% endif %}
