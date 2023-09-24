@@ -1,3 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .forms import ReportForm
+
+
+def index(request):
+    form = ReportForm()
+    return render(request, 'report.html', context={
+        'form': form
+    })
