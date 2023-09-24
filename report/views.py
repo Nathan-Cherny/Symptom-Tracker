@@ -13,17 +13,15 @@ def index(request):
     if request.method == 'POST':
         data = request.POST.dict()
 
-        print(data)
-
         match data['diagnosed']:
             case "I haven't been diagnosed with anything recently":
-                data['diagnosed_with'] = 'nothing'
+                data['diagnosed'] = 'nothing'
             case "COVID 19":
-                data['diagnosed_with'] = 'covid'
+                data['diagnosed'] = 'covid'
             case "Common Cold":
-                data['diagnosed_with'] = 'common cold'
+                data['diagnosed'] = 'common cold'
             case "Stomach Bug":
-                data['diagnosed_with'] = 'stomach bug'
+                data['diagnosed'] = 'stomach bug'
 
         report_data = {
             'user': User.objects.get(email=request.session['user']['userinfo']['email']),
@@ -45,15 +43,13 @@ def index(request):
                 'taste': data.get('taste') == 'on',
                 'breathing': data.get('breathing') == 'on',
                 'nose': data.get('nose') == 'on',
-                'taste': data.get('taste') == 'on'
+                'throat': data.get('throat') == 'on'
             }
         }
 
-        print(report_data)
-
-        # report = Report.objects.create(**report_data)
-        # if not report.diagnosed_with == 'nothing':
-        #     Place.objects.filter(name=report.lives_at).update(health_score=F('health_score') + 2)
+        report = Report.objects.create(**report_data)
+        if report.diagnosed_with != 'nothing':
+            Place.objects.filter(name=report.lives_at).update(health_score=F('health_score') + 2)
 
     form = ReportForm()
     return render(request, 'report.html', context={
