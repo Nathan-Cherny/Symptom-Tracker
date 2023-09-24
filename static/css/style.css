@@ -17,6 +17,11 @@ body{
 
 tr div{
     position: relative;
+    background-color: green;
+}
+
+tr{
+    text-align: center
 }
 
 td{
@@ -26,6 +31,7 @@ td{
 img{
     width: 300px;
     height: 250px;
+    opacity: 65%;
 }
 
 .tableContainer{
