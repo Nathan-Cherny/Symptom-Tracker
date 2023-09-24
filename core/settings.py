@@ -1,6 +1,6 @@
+import os
 from pathlib import Path
 
-import os
 from dotenv import load_dotenv, find_dotenv
 
 ENV_FILE = find_dotenv()
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'django_celery_results',
+    'django_crontab',
 
     'report',
     'users',
@@ -140,3 +141,8 @@ result_serializer = 'json'
 task_serializer = 'json'
 timezone = 'US/Eastern'
 CELERY_RESULT_BACKEND = 'django-db'
+
+# Cronjob
+CRONJOBS = [
+    ('0 44 * * *', 'report.tasks.delete_report'),
+]
