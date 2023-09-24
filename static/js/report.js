@@ -5,7 +5,6 @@ function notDiagnosed(){
 }
 
 function diagnosed(){
-    //TODO DIAGNOSED STUFF AAAH
     var diagnosed = document.getElementById("diagnosed").style.display = "none"
     document.getElementById("hallQuestion").style.display = "block"
     document.getElementById("finalSubmit").style.display = "block"
@@ -22,4 +21,31 @@ function onDiagnosedSubmit(){
     else{
         notDiagnosed()
     }
+}
+
+function getDictOfData(){
+    let selects = document.getElementsByTagName("select")
+    let inputs = document.getElementsByTagName("input")
+    
+    let postDict = {}
+
+    for(let select of selects){
+        postDict[select.name] = select.value
+    }
+
+    for(let input of inputs){
+        postDict[input.name] = input.checked
+    }
+
+    return postDict
+}
+
+function postForm(){
+    let data = getDictOfData()
+
+    var xmlhttp = new XMLHttpRequest();
+    var xml = data
+
+    xmlhttp.setRequestHeader('Content-Type', 'text/json')
+    xmlhttp.send(xml)
 }

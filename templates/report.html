@@ -21,10 +21,10 @@
     </head>
     <body style="background-image: linear-gradient(rgb(150, 150, 200), rgb(150, 200, 150)); height: 1250px;">
         <ul class="navigation">
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
             {% if session %}
-            <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
+            <li style="float: right" ><a class="far fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
             {% else %}
             <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
             {% endif %}
@@ -140,12 +140,10 @@
                     
                 </div>
                 <div id="finalSubmit">
-                    <button onclick="console.log(document.getElementById('post'))">Submit</button>
+                    <button onsubmit="postForm()"type="submit">Submit</button>
                 </div>
             </form>
         </div>
-
-            {{ form }}
     </body>
 
 </html>
