@@ -37,6 +37,11 @@ img{
 
 .key{
     border: 1px solid black;
+    padding: 10px;
+}
+
+.key p{
+    margin: 0;
 }
 
 .box{
@@ -62,6 +67,10 @@ img{
     width: 90%;
     padding: 10px;
     font-size: 25px;
+}
+
+#scriptStuff{
+    display: none;
 }
 
 .navigation{

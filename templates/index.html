@@ -7,7 +7,7 @@
     <title>Is there an outbreak?</title>
   </head>
 
-  <body>
+  <body onload="setTDs()">
 
     <ul class="navigation">
         <li class="active"><a href="/">Home</a></li>
@@ -24,9 +24,9 @@
       </div>
 
       <div class="key">
-        <p><span style="font-size: 45px; color: red">&#9632;</span> : more than 60 cases of a specific disease at this place - stay away</p> 
-        <p><span style="font-size: 45px; color: orange">&#9632;</span> : more than 30 cases of a specific disease at this place - be cautious</p> 
-        <p><span style="font-size: 45px; color: green">&#9632;</span> : more than 0 cases of a specific disease at this place - little concern</p>
+        <p><span style="font-size: 45px; color: red">&#9632;</span> : At least 60 cases of a specific disease at this place - stay away</p> 
+        <p><span style="font-size: 45px; color: orange">&#9632;</span> : At least 30 cases of a specific disease at this place - be cautious</p> 
+        <p><span style="font-size: 45px; color: green">&#9632;</span> : At least 0 cases of a specific disease at this place - little concern</p>
       </div>
       <div style="background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150))">
           <table class="tableContainer center">
@@ -129,9 +129,12 @@
             <a id="banana" target="none" href="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" >Made by TEAM THUMBS UP 👍👍👍</a>| OWLhacks Fall 2023 | <a style="font-size: 20px;" href="https://github.com/Nathan-Cherny/Symptom-Tracker">github.com/Nathan-Cherny/Symptom-Tracker</a>
         </footer>
      </div>
+
+     <div id="scriptStuff">
       {% for place in places %}
-        <p> {{ place.name }} </p>
-        <p> {{ place.health_score }} </p>
+        <p name="place"> {{ place.name }} </p>
+        <p name="health_score"> {{ place.health_score }} </p>
       {% endfor %}
+      </div>
   </body>
 </html>
