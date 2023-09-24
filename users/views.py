@@ -1,12 +1,12 @@
-import json
-from authlib.integrations.django_client import OAuth
-from django.conf import settings
-from django.shortcuts import redirect, render
-from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 
+from authlib.integrations.django_client import OAuth
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect, render
+from django.urls import reverse
+
+from places.models import Place
 
 User = get_user_model()
 
@@ -51,7 +51,7 @@ def logout(request):
         f"https://{settings.AUTH0_DOMAIN}/v2/logout?"
         + urlencode(
             {
-                "returnTo": request.build_absolute_uri(reverse("index")),
+                "returnTo": request.build_absolute_uri('/'),
                 "client_id": settings.AUTH0_CLIENT_ID,
             },
             quote_via=quote_plus,
@@ -60,14 +60,12 @@ def logout(request):
 
 
 def index(request):
-    print(request.session.get("user"))
+    places = Place.objects.all()
     return render(
         request,
         "index.html",
         context={
             "session": request.session.get("user"),
+            'places': places
         },
     )
-
-def report(request):
-    return render(request, 'report.html', context={})

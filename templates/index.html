@@ -3,122 +3,139 @@
   <head>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-
-    <title>Symptom Tracker</title>
+    <script src="{% static 'js/receiveData.js' %}"></script>
+    <title>Is there an outbreak?</title>
   </head>
 
-  <body>
+  <body onload="setTDs()">
 
-      <ul class="navigation">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="{% url 'report' %}">Report a Sickness</a></li>
+    <ul class="navigation">
+        <li class="active"><a href="/">Home</a></li>
+        <li ><a href="/report">Report a Sickness</a></li>
+        {% if session %}
+        <li style="float: right;"><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+        <li style="float: right;"> <a style="font-size: 25px;">Welcome {{ session.userinfo.given_name}} </a></li>
+        {% else %}
+        <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
+        {% endif %}
+    </ul>
 
-          {% if session %}
-          <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'logout' %}"> Logout</a></li>
-          {% else %}
-          <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
-          {% endif %}
-      </ul>
-
-      <div>
-          <h1>Symptom Tracker 👍👍👍</h1>
+      <div style="background-color: rgb(200, 200, 200); padding: 15px; margin-top: -10px;">
+          <h1>Is There An Outbreak On Campus?</h1>
       </div>
 
-      <div>
+      <div class="key">
+        <p><span style="font-size: 45px; color: red">&#9632;</span> : At least 60 cases of a specific disease at this place - stay away</p> 
+        <p><span style="font-size: 45px; color: orange">&#9632;</span> : At least 30 cases of a specific disease at this place - be cautious</p> 
+        <p><span style="font-size: 45px; color: green">&#9632;</span> : At least 0 cases of a specific disease at this place - little concern</p>
+      </div>
+      <div style="background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150))">
           <table class="tableContainer center">
               <tbody>
                   <tr>
-                    <td>
+                    <td id="kardon">
                         <div>
                             <img src="{% static 'buildings/kardon.png' %}">
                             <div class="centeredInImage">Kardon</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="atlantic">
                         <div>
                             <img src="{% static 'buildings/atlantic.png' %}">
                             <div class="centeredInImage">Atlantic Terminal</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="university">
                         <div>
                             <img src="{% static 'buildings/university.png' %}">
                             <div class="centeredInImage">University Village</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="white">
                         <div>
                             <img src="{% static 'buildings/james_s_white.png' %}">
                             <div class="centeredInImage">White Hall</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
+                    <td id="jh">
                         <div>
                             <img src="{% static 'buildings/j_h.png' %}">
                             <div class="centeredInImage">J&H</div>
                         </div>
                     </td>
-                    <td>
+                  </tr>
+                  <tr>
+                    <td id="1940">
                         <div>
                             <img src="{% static 'buildings/nineteen_forty.png' %}">
                             <div class="centeredInImage">1940</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="conwell">
                         <div>
                             <img src="{% static 'buildings/conwell.png' %}">
                             <div class="centeredInImage">Conwell</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="beech">
                         <div>
-                            <img src="{% static 'buildings/Beech International.png' %}">
+                            <img src="{% static 'buildings/beech.png' %}">
                             <div class="centeredInImage">Beech International</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
+                    <td id="edge">
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
+                            <img src="{% static 'buildings/edge.png' %}">
                             <div class="centeredInImage">The Edge</div>
                         </div>
-                    </td>
-                    <td>
+                    </td> 
+                    <td id="morgan">
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
+                            <img src="{% static 'buildings/morgan_hall.png' %}">
                             <div class="centeredInImage">Morgan Hall</div>
                         </div>
                     </td>
-                    <td>
+                  </tr>
+                  <tr>
+                   <td>
+                    <img style="transform: scaleX(-1); mix-blend-mode: multiply;">
+                   </td>
+                    <td id="oxford">
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
+                            <img src="{% static 'buildings/oxford_village.png' %}">
                             <div class="centeredInImage">Oxford Village</div>
                         </div>
                     </td>
-                    <td>
+                    <td id="1300">
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
+                            <img src="{% static 'buildings/thirteen.png' %}">
                             <div class="centeredInImage">1300</div>
                         </div>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
+                    <td id="towers">
                         <div>
-                            <img src="{% static 'buildings/kardon.png' %}">
+                            <img src="{% static 'buildings/temple.towers.png' %}">
                             <div class="centeredInImage">Temple Towers</div>
                         </div>
+                    </td>
+                    <td>
+                        <img>
                     </td>
                   </tr>
               </tbody>
           </table>
       </div>
-      
-      <div class="center">
-          <a href="report.html">Report Symptoms</a>
+      <div style="background-color: rgb(150, 150, 150); padding: 15px;">
+        <footer>
+            <a id="banana" target="none" href="https://i5.walmartimages.com/seo/Rasta-Imposta-Ultimate-Banana-Fruit-Men-s-Halloween-Costume-for-Adult-Regular-One-Size-Yellow_03492010-1d02-41c4-8f51-ead011c05876.ce97644b86858880032d58327d5899cf.jpeg?odnHeight=640&odnWidth=640&odnBg=FFFFFF" >Made by TEAM THUMBS UP 👍👍👍</a>| OWLhacks Fall 2023 | <a style="font-size: 20px;" href="https://github.com/Nathan-Cherny/Symptom-Tracker">github.com/Nathan-Cherny/Symptom-Tracker</a>
+        </footer>
+     </div>
+
+     <div id="scriptStuff">
+      {% for place in places %}
+        <p name="place"> {{ place.name }} </p>
+        <p name="health_score"> {{ place.health_score }} </p>
+      {% endfor %}
       </div>
   </body>
 </html>

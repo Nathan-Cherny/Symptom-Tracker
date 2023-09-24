@@ -1,6 +1,6 @@
+import os
 from pathlib import Path
 
-import os
 from dotenv import load_dotenv, find_dotenv
 
 ENV_FILE = find_dotenv()
@@ -31,7 +31,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "users",
+    'places',
+    'report',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +122,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
 AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
 AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://localhost:6379/0',
+        'TIMEOUT': 60,
+        'MAX_ENTRIES': 1_000_000,
+    },
+}

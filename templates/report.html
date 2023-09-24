@@ -2,28 +2,153 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="main.js"></script>
+        <script src="{% static 'js/report.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <style>
+            #notDiagnosed{
+                display: none;
+            }
+            #hallQuestion{
+                display: none;
+            }
+            #finalSubmit{
+                display: none;
+            }
+        </style>
         <title>Symptom Tracker</title>
     </head>
-    <body>
+    <body style="background-image: linear-gradient(rgb(150, 150, 200), rgb(150, 200, 150)); height: 1350px;">
         <ul class="navigation">
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li ><a href="/">Home</a></li>
             <li class="active"><a href="#">Report a Sickness</a></li>
-        </ul>
 
+            {% if session %}
+            <li style="float: right;"><img style="border-radius: 50%; margin-top: 5px; height: 50px; width: 50px;" src="{{ session.userinfo.picture }}"><a style="float: right;" href="{% url 'logout' %}"> Logout</a></li>
+            <li style="float: right;"> <a style="font-size: 25px;">Welcome {{ session.userinfo.given_name}} </a></li>
+            {% else %}
+            <li style="float: right" ><a class="fas fa-user-alt" href="{% url 'login' %}"> Login</a></li>
+            {% endif %}
+        </ul>
+        {% if session %}
         <div>
-            <form action="POST">
-                <input name="hall"/>
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                <label for="vehicle1"> I have a bike</label><br>
-                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                <label for="vehicle2"> I have a car</label><br>
-                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                <label for="vehicle3"> I have a boat</label>
-                <input type="submit" value="Submit">
+            <h1>Enter a report of illness</h1>
+            <p>By entering information based off of a recent diagnosis or symptoms you currently feel, we can accurately track outbreaks and prevent illness from spreading in our community. Please, answer the following.</p>
+        </div>
+        <hr>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <div style="padding: 15px;" id="diagnosed">
+                    <label for="diagnosed">Are you diagnosed with...</label>
+                    <select name="diagnosed">
+                        <option>I haven't been diagnosed with anything recently</option>
+                        <option>COVID 19</option>
+                        <option>Common Cold</option>
+                        <option>Stomach Bug</option>
+                    </select>
+                    <button type="button" onclick="onDiagnosedSubmit()">Submit</button>
+                </div>
+                <div>
+                <div id="hallQuestion">
+                    <label for="hall">Where do you live?</label>
+                    <select name="hall">
+                        <option value="kardon">Kardon</option>
+                        <option value="atlantic">Atlantic Terminal</option>
+                        <option value="university">University Village</option>
+                        <option value="james_s_white">White Hall</option>
+                        <option value="j_h">J&H</option>
+                        <option value="nineteen_forty">1940</option>
+                        <option value="conwell">Conwell</option>
+                        <option value="beech">Beech International</option>
+                        <option value="edge">The Edge</option>
+                        <option value="morgan_hall">Morgan Hall</option>
+                        <option value="oxford_village">Oxford Village</option>
+                        <option value="thirteen">1300</option>
+                        <option value="temple_towers">Temple Towers</option>
+                    </select>
+                </div>
+                <hr>
+                <div id="notDiagnosed">
+                    <p>What are some symptoms you have been experiencing recently?</p>
+                    <div>
+                        <label for="cough">Cough</label>
+                        <input type="checkbox" id="" name="cough">
+                    </div>
+                    <div>
+                        <label for="fever">Fever</label>
+                        <input type="checkbox" id="" name="fever">
+                    </div>
+                    <div>
+                        <label for="chills">Chills</label>
+                        <input type="checkbox" id="" name="chills">
+                    </div>
+                    <div>
+                        <label for="smell">No Smell</label>
+                        <input type="checkbox" id="" name="smell">
+                    </div>
+                    <div>
+                        <label for="fatigue">Fatigue</label>
+                        <input type="checkbox" id="" name="fatigue">
+                    </div>
+                    <div>
+                        <label for="vomit">Vomit</label>
+                        <input type="checkbox" id="" name="vomit">
+                    </div>
+                    <div>
+                        <label for="nausea">Nausea</label>
+                        <input type="checkbox" id="" name="nausea">
+                    </div>
+                    <div>
+                        <label for="stomach">Stomach Ache</label>
+                        <input type="checkbox" id="" name="stomach">
+                    </div>
+                    <div>
+                        <label for="diarrhea">Diarrhea</label>
+                        <input type="checkbox" id="" name="diarrhea">
+                    </div>
+                    <div>
+                        <label for="taste">No Taste</label>
+                        <input type="checkbox" id="" name="taste">
+                    </div>
+                    <div>
+                        <label for="breathing">Difficulty Breathing</label>
+                        <input type="checkbox" id="" name="breathing">
+                    </div>
+                    <div>
+                        <label for="nose">Runny Nose</label>
+                        <input type="checkbox" id="" name="nose">
+                    </div>
+                    <div>
+                        <label for="taste">Sore Throat</label>
+                        <input type="checkbox" id="" name="taste">
+                    </div>
+                    <hr>
+                    <div>
+                        <label for="smoke">Have you smoked recently?</label>
+                        <input type="checkbox" id="" name="smoke">
+                    </div>
+                    <div>
+                        <label for="drink">Have you drank recently?</label>
+                        <input type="checkbox" id="" name="drink">
+                    </div>
+                    <div>
+                        <label for="sick">Have you been around a sick person recently?</label>
+                        <input type="checkbox" id="" name="sick">
+                    </div>
+                    <hr>    
+                    
+                </div>
+                <div id="finalSubmit">
+                   
+                    <button onsubmit="postForm()" type="submit">Submit</button>
+                </div>
             </form>
         </div>
+        {% else %}
+        <h1>Please login! You can log in with your Google account at the top right!</h1>
+        {% endif %}
     </body>
+
 </html>
